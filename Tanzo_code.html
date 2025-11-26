@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanzo - Restaurant & Cafe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-bar {
+            background: #764ba2;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .category-title {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            flex: 1;
+        }
+
+        .item-type {
+            background: #764ba2;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .veg { background: #28a745; }
+        .nonveg { background: #dc3545; }
+        .other { background: #ffc107; color: #000; }
+
+        .item-price {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 10px 0;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .order-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #764ba2;
+            color: #764ba2;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #764ba2;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">TANZO</div>
+            <div class="tagline">Restaurant • Cafe • Sweet Waffles</div>
+            <div class="contact-bar">
+                <div class="contact-item">📞 +91 YOUR_PHONE_HERE</div>
+                <div class="contact-item">📍 Your Restaurant Address</div>
+                <div class="contact-item">🕒 Open: 11AM-11PM Daily</div>
+            </div>
+        </header>
+
+        <div class="loading" id="loading">
+            Loading menu...
+        </div>
+
+        <div class="category-nav" id="categoryNav">
+            <!-- Categories will be inserted here by JavaScript -->
+        </div>
+
+        <div id="menuContainer">
+            <!-- Menu items will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Tanzo Restaurant & Cafe. All rights reserved.</p>
+        <p>Made with ❤️ for food lovers</p>
+    </footer>
+
+    <script>
+        // Simple menu data - cleaned version
+        const menuData = [
+            // Pocket Pizza's
+            {name: "Paneer tikka pocket pizza", type: "veg", category: "Pocket Pizza's", desc: "Fiery peri peri paneer tikka loaded with spicy seasonings, fresh veggies, and oozing cheese", price: "238.8"},
+            {name: "Golden corn pocket pizza", type: "veg", category: "Pocket Pizza's", desc: "Sweet golden corn layered over cheesy goodness and a soft, fresh crust", price: "202.8"},
+            {name: "Margherita pocket pizza", type: "veg", category: "Pocket Pizza's", desc: "Authentic Italian favorite – rich tomato sauce, mozzarella cheese, and perfect golden crust", price: "202.8"},
+            {name: "Cheesy Veggie Overload Pocket pizza", type: "veg", category: "Pocket Pizza's", desc: "Loaded with fresh veggies and extra layers of gooey cheese", price: "262.8"},
+            {name: "BBQ Chicken & Cheese Pocket pizza", type: "nonveg", category: "Pocket Pizza's", desc: "BBQ chicken, gooey melted cheese, and golden pocket crust baked to perfection", price: "298.8"},
+            
+            // Smash Burger's
+            {name: "Smash Chicken Double Patty Melt burger", type: "nonveg", category: "Smash Burger's", desc: "Two juicy chicken patties smashed to perfection with melted cheese", price: "286.8"},
+            {name: "Cheesy Veg Supreme Burger", type: "veg", category: "Smash Burger's", desc: "Veggie-loaded smash patty with gooey cheese and fresh veggies", price: "214.8"},
+            {name: "Spicy Paneer Smash burger", type: "veg", category: "Smash Burger's", desc: "Fiery peri-peri paneer smashed and grilled with spices and cheese", price: "226.8"},
+            {name: "Chicken Zinger burger", type: "nonveg", category: "Smash Burger's", desc: "Crispy golden-fried chicken fillet with fresh lettuce and creamy mayo", price: "262.8"},
+            
+            // Fried Chicken
+            {name: "Hot & Crispy Chicken (4 pcs)", type: "nonveg", category: "Fried Chicken", desc: "Four pieces of crunchy, flavorful fried chicken", price: "274.8"},
+            {name: "Peri Peri Chicken Wings - 4 pcs", type: "nonveg", category: "Fried Chicken", desc: "Fiery peri peri marinated wings fried crisp and bursting with flavor", price: "238.8"},
+            {name: "Chicken Nuggets 6 pcs", type: "nonveg", category: "Fried Chicken", desc: "Six crunchy chicken nuggets – perfect for sharing", price: "202.8"},
+            
+            // Waffles
+            {name: "Nutella & Oreo Blast", type: "veg", category: "Belgian Waffles", desc: "Crisp Belgian waffle with Nutella, crushed Oreos & chocolate drizzle", price: "202.8"},
+            {name: "Lotus Biscoff Waffle", type: "veg", category: "Belgian Waffles", desc: "Loaded with Biscoff spread, cookie crumbs & chocolate drizzle", price: "226.8"},
+            {name: "KitKat Crunch Waffle", type: "veg", category: "Belgian Waffles", desc: "Crisp waffle topped with KitKat chunks & drizzled chocolate", price: "190.8"},
+            
+            // Beverages
+            {name: "Oreo Milk Shake", type: "veg", category: "Milk Shakes", desc: "Crunchy Oreo cookies blended into a creamy shake", price: "190.8"},
+            {name: "Butterscotch Milk Shake", type: "veg", category: "Milk Shakes", desc: "Rich butterscotch blended into a velvety shake", price: "178.8"},
+            {name: "Fresh Lime Soda", type: "veg", category: "Mojito's", desc: "Classic and zesty sparkling blend of lime, soda and mint", price: "82.8"}
+        ];
+
+        function initializeMenu() {
+            const loadingElement = document.getElementById('loading');
+            const categoryNav = document.getElementById('categoryNav');
+            const menuContainer = document.getElementById('menuContainer');
+            
+            // Hide loading
+            loadingElement.style.display = 'none';
+            
+            // Group by category
+            const categories = {};
+            menuData.forEach(item => {
+                if (!categories[item.category]) {
+                    categories[item.category] = [];
+                }
+                categories[item.category].push(item);
+            });
+
+            // Create category navigation
+            Object.keys(categories).forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-btn';
+                button.textContent = category;
+                button.onclick = () => scrollToCategory(category);
+                categoryNav.appendChild(button);
+            });
+
+            // Create menu sections
+            Object.keys(categories).forEach(category => {
+                const section = document.createElement('div');
+                section.className = 'category-section';
+                section.id = `category-${category.replace(/\s+/g, '-')}`;
+                
+                const title = document.createElement('h2');
+                title.className = 'category-title';
+                title.textContent = category;
+                
+                const grid = document.createElement('div');
+                grid.className = 'menu-grid';
+                
+                categories[category].forEach(item => {
+                    const menuItem = document.createElement('div');
+                    menuItem.className = 'menu-item';
+                    
+                    menuItem.innerHTML = `
+                        <div class="item-header">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-type ${item.type}">${item.type.toUpperCase()}</div>
+                        </div>
+                        <div class="item-price">₹${item.price}</div>
+                        <div class="item-description">${item.desc}</div>
+                        <button class="order-btn" onclick="orderItem('${item.name.replace(/'/g, "\\'")}')">
+                            Order via WhatsApp
+                        </button>
+                    `;
+                    
+                    grid.appendChild(menuItem);
+                });
+                
+                section.appendChild(title);
+                section.appendChild(grid);
+                menuContainer.appendChild(section);
+            });
+
+            // Make first category button active
+            if (categoryNav.firstChild) {
+                categoryNav.firstChild.classList.add('active');
+            }
+        }
+
+        function scrollToCategory(category) {
+            const element = document.getElementById(`category-${category.replace(/\s+/g, '-')}`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function orderItem(itemName) {
+            // REPLACE THIS WITH YOUR ACTUAL WHATSAPP NUMBER
+            const phoneNumber = "918179974273"; // Example: 91 + your 10-digit number
+            const message = `Hi Tanzo! I'd like to order: ${itemName}`;
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Initialize menu when page loads
+        document.addEventListener('DOMContentLoaded', initializeMenu);
+    </script>
+</body>
+</html>
