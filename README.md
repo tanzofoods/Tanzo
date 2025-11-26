@@ -1,1 +1,122 @@
 # Tanzo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanzo - Restaurant & Cafe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #764ba2;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            color: #764ba2;
+        }
+        .menu-item {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .item-name {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .item-price {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+        .order-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">TANZO</div>
+            <div>Restaurant • Cafe • Sweet Waffles</div>
+        </div>
+
+        <h2>Popular Items</h2>
+        
+        <div class="menu-item">
+            <div class="item-name">Paneer Tikka Pocket Pizza</div>
+            <div class="item-price">₹238.8</div>
+            <div>Fiery peri peri paneer tikka with cheese and fresh veggies</div>
+            <button class="order-btn" onclick="orderWhatsApp('Paneer Tikka Pocket Pizza')">Order via WhatsApp</button>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-name">BBQ Chicken Pocket Pizza</div>
+            <div class="item-price">₹298.8</div>
+            <div>BBQ chicken with gooey melted cheese on golden crust</div>
+            <button class="order-btn" onclick="orderWhatsApp('BBQ Chicken Pocket Pizza')">Order via WhatsApp</button>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-name">Smash Chicken Burger</div>
+            <div class="item-price">₹286.8</div>
+            <div>Double chicken patties with cheese and signature sauces</div>
+            <button class="order-btn" onclick="orderWhatsApp('Smash Chicken Burger')">Order via WhatsApp</button>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-name">Nutella Oreo Waffle</div>
+            <div class="item-price">₹202.8</div>
+            <div>Belgian waffle with Nutella and crushed Oreos</div>
+            <button class="order-btn" onclick="orderWhatsApp('Nutella Oreo Waffle')">Order via WhatsApp</button>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-name">Oreo Milk Shake</div>
+            <div class="item-price">₹190.8</div>
+            <div>Creamy shake with crunchy Oreo cookies</div>
+            <button class="order-btn" onclick="orderWhatsApp('Oreo Milk Shake')">Order via WhatsApp</button>
+        </div>
+
+        <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+            <h3>Contact Us</h3>
+            <p>📞 +91 YOUR_PHONE_HERE</p>
+            <p>📍 Your Restaurant Address</p>
+            <p>🕒 Open: 11AM-11PM Daily</p>
+        </div>
+    </div>
+
+    <script>
+        function orderWhatsApp(itemName) {
+            // REPLACE THIS WITH YOUR WHATSAPP NUMBER
+            const phone = "918179974273"; // Example: 91 + your 10-digit number
+            const message = `Hi Tanzo! I'd like to order: ${itemName}`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
