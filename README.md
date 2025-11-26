@@ -2,7 +2,7 @@
 
 A beautiful, responsive web app for Tanzo Restaurant & Cafe allowing customers to browse the menu and order directly via WhatsApp.
 
-## 🌐 Live App
+## 🌐 Live App 
 **Visit:** https://tanzofoods.github.io/Tanzo/
 
 ## 📱 Features
