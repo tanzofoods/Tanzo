@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanzo - Restaurant & Cafe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-bar {
+            background: #764ba2;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .category-title {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            flex: 1;
+        }
+
+        .item-type {
+            background: #764ba2;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .veg { background: #28a745; }
+        .non-veg { background: #dc3545; }
+        .other { background: #ffc107; color: #000; }
+
+        .item-price {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 10px 0;
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .order-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #764ba2;
+            color: #764ba2;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #764ba2;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">TANZO</div>
+            <div class="tagline">Restaurant • Cafe • Sweet Waffles</div>
+            <div class="contact-bar">
+                <div class="contact-item">📞 Your Phone Number</div>
+                <div class="contact-item">📍 Your Address</div>
+                <div class="contact-item">🕒 Open: 11AM-11PM Daily</div>
+            </div>
+        </header>
+
+        <div class="category-nav" id="categoryNav">
+            <!-- Categories will be inserted here by JavaScript -->
+        </div>
+
+        <div id="menuContainer">
+            <!-- Menu items will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Tanzo Restaurant & Cafe. All rights reserved.</p>
+        <p>Made with ❤️ for food lovers</p>
+    </footer>
+
+    <script>
+        // Your menu data
+        const menuData = [
+            {ITEM: "Paneer tikka pocket pizza", TYPE: "Veg", Cetegory: "Pocket Pizza's", Description: "Fiery peri peri paneer tikka loaded with spicy seasonings, fresh veggies, and oozing cheese on a soft, baked crust – a perfect desi twist to your pizza craving", Price: "238.8"},
+            {ITEM: "Golden corn pocket pizza", TYPE: "Veg", Cetegory: "Pocket Pizza's", Description: "Sweet golden corn layered over cheesy goodness and a soft, fresh crust – simple, classic, and irresistible.", Price: "202.8"},
+            {ITEM: "margherita pocket pizza", TYPE: "Veg", Cetegory: "Pocket Pizza's", Description: "Authentic Italian favorite – rich tomato sauce, mozzarella cheese, and a perfect golden crust.", Price: "202.8"},
+            {ITEM: "Cheesy Veggie Overload Pocket pizza", TYPE: "Veg", Cetegory: "Pocket Pizza's", Description: "Loaded with fresh veggies and extra layers of gooey cheese – a true veggie lover's delight.", Price: "262.8"},
+            {ITEM: "BBQ Chicken & Cheese Pocket pizza", TYPE: "Non-Veg", Cetegory: "Pocket Pizza's", Description: "BBQ chicken, gooey melted cheese, and a golden pocket crust baked to perfection – the ultimate grab-and-go pizza snack.", Price: "298.8"},
+            {ITEM: "pepperoni pocket pizza", TYPE: "Non-Veg", Cetegory: "Pocket Pizza's", Description: "Savory pepperoni slices with melted cheese on a perfectly baked crust – the all-time classic.", Price: "310.8"},
+            {ITEM: "Smash Chicken Double Patty Melt burger", TYPE: "Non-Veg", Cetegory: "Smash Burger's", Description: "Two juicy chicken patties smashed to perfection, layered with melted cheese and signature sauces in a soft bun.", Price: "286.8"},
+            {ITEM: "Cheesy Veg Supreme Burger", TYPE: "Veg", Cetegory: "Smash Burger's", Description: "A veggie-loaded smash patty topped with gooey cheese, fresh veggies, and creamy sauces – the ultimate cheesy indulgence.", Price: "214.8"},
+            {ITEM: "Spicy Paneer Smash burger", TYPE: "Veg", Cetegory: "Smash Burger's", Description: "Fiery peri-peri paneer smashed and grilled, loaded with spices, cheese, and crunchy veggies for a bold desi bite.", Price: "226.8"},
+            {ITEM: "Texas Burger", TYPE: "Veg", Cetegory: "Smash Burger's", Description: "A hearty smash burger stacked with smoky chicken, BBQ sauce, fries, cheese, and crispy onions – big flavors, Texas-style.", Price: "274.8"},
+            {ITEM: "Tower Burger", TYPE: "Non-Veg", Cetegory: "Smash Burger's", Description: "A tall, loaded with patties, fries, half boiled egg, cheese, veggies, and sauces – a towering feast made to conquer your hunger.", Price: "322.8"},
+            {ITEM: "Crunchy Aloo Tikki Street Style burger", TYPE: "Veg", Cetegory: "Smash Burger's", Description: "Crispy smashed aloo tikki, tangy chutneys, fresh veggies, and a burst of Indian street-style flavors.", Price: "202.8"},
+            {ITEM: "Classic chicken Supreme Burger", TYPE: "Non-Veg", Cetegory: "Smash Burger's", Description: "Juicy chicken smash patty with fresh lettuce, cheese, and signature mayo – simple, classic, and delicious.", Price: "238.8"},
+            {ITEM: "Smash Grilled Chicken burger", TYPE: "Non-Veg", Cetegory: "Smash Burger's", Description: "Perfectly grilled chicken patty with smoky seasoning, melted cheese, and a hint of spice for a lighter yet flavorful bite.", Price: "250.8"},
+            {ITEM: "Hot & Crispy Chicken(4 pcs)", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Four pieces of crunchy, flavorful fried chicken – share it or savor it all yourself.", Price: "274.8"},
+            {ITEM: "Hot & Crispy Chicken(6 pcs)", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Six pieces of crunchy, flavorful fried chicken – share it or savor it all yourself.", Price: "322.8"},
+            {ITEM: "Hot & Crispy Chicken Strips - 5 pcs", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Crispy chicken strips served with a dip of your choice – crunchy on the outside, tender inside.", Price: "238.8"},
+            {ITEM: "Peri Peri Chicken Wings - 4 pcs", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Fiery peri peri marinated wings fried crisp and bursting with spicy, smoky flavor.", Price: "238.8"},
+            {ITEM: "Loaded Chicken Popcorn Box - Regular", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Crispy, bite-sized chicken popcorn packed with flavor – a snack that hits the spot", Price: "226.8"},
+            {ITEM: "Loaded Chicken Popcorn Box - Large", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Bigger box, bigger crunch – 250g of golden chicken popcorn to keep the cravings away.", Price: "286.8"},
+            {ITEM: "BBQ wings  4 pcs", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Juicy chicken wings coated in smoky-sweet BBQ sauce – sticky, saucy, and finger-licking good", Price: "250.8"},
+            {ITEM: "Mozzarella Cheese Stix 5pcs", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Golden-fried sticks filled with gooey mozzarella cheese – crispy on the outside, irresistibly cheesy on the inside.", Price: "202.8"},
+            {ITEM: "chicken nuggets 6 pcs", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Six crunchy chicken nuggets – more bites, more fun to share (or not!).", Price: "202.8"},
+            {ITEM: "chicken nuggets 10 pcs", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Ten crunchy chicken nuggets – more bites, more fun to share (or not!).", Price: "250.8"},
+            {ITEM: "veg nuggets - 6 pcs", TYPE: "Veg", Cetegory: "Fried Chicken", Description: "Crispy vegetarian nuggets loaded with flavor – a perfect snack for everyone.", Price: "178.8"},
+            {ITEM: "cheesy nuggets - 6 pcs", TYPE: "Veg", Cetegory: "Fried Chicken", Description: "Golden-fried nuggets with a gooey, cheesy center – melty and irresistible.", Price: "190.8"},
+            {ITEM: "Cheese Loaded Fries", TYPE: "Veg", Cetegory: "French Fries", Description: "Golden fries smothered in creamy melted cheese – indulgence in every bite.", Price: "214.8"},
+            {ITEM: "Chicken cheese loaded fries", TYPE: "Non-Veg", Cetegory: "French Fries", Description: "Crispy fries topped with juicy chicken bits and rich cheesy goodness – a hearty loaded treat.", Price: "299"},
+            {ITEM: "Peri Peri Fries", TYPE: "Veg", Cetegory: "French Fries", Description: "Crisp fries tossed in fiery peri peri seasoning – spicy, zesty, and addictive.", Price: "202.8"},
+            {ITEM: "Butter Garlic Fries", TYPE: "Veg", Cetegory: "French Fries", Description: "Fragrant butter and roasted garlic tossed over crispy fries – rich, flavorful, and oh-so-good.", Price: "214.8"},
+            {ITEM: "Mexican Salsa Loaded Fries", TYPE: "Veg", Cetegory: "French Fries", Description: "", Price: "154.7"},
+            {ITEM: "Classic Salted Fries", TYPE: "Veg", Cetegory: "French Fries", Description: "Simple, golden, and perfectly salted – the all-time favorite snack.", Price: "190.8"},
+            {ITEM: "Nutella & Oreo Blast(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "Mini waffle drizzled with Nutella, topped with crushed Oreos – small in size, big on flavor.", Price: "130.8"},
+            {ITEM: "Tripple chocolate(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "A chocolate lover's dream – dark, milk & white chocolate loaded onto a soft mini waffle.", Price: "106.8"},
+            {ITEM: "Classic Belgian with Maple Drizzle(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "Crisp mini waffle topped with golden maple drizzle – simple, sweet, and timeless.", Price: "118.8"},
+            {ITEM: "lotus biscoff(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "Mini waffle layered with creamy Biscoff spread & cookie crumbles – caramelized bliss in every bite.", Price: "130.8"},
+            {ITEM: "KitKat Crunch Waffle(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "Mini waffle topped with crunchy KitKat pieces and a drizzle of chocolate – crispy, creamy, dreamy.", Price: "118.8"},
+            {ITEM: "Red Velvet(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "Velvety red waffle topped with cream & chocolate drizzle – bite-sized indulgence.", Price: "118.8"},
+            {ITEM: "Dark & White Chocolate(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "Perfect duo – rich dark & smooth white chocolate drizzled over a crisp mini waffle.", Price: "94.8"},
+            {ITEM: "Milk & Dark Chocolate(Mini)", TYPE: "Veg", Cetegory: "MINI Waffles", Description: "A swirl of creamy milk chocolate and bold dark chocolate over a mini waffle delight.", Price: "94.8"},
+            {ITEM: "Nutella & Oreo Blast(Belgian Waffles)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "Crisp Belgian waffle topped with Nutella, crushed Oreos & extra chocolate drizzle – pure indulgence.", Price: "202.8"},
+            {ITEM: "Tripple chocolate(Belgian Waffles)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "Three times the fun – layers of dark, milk & white chocolate over a golden Belgian waffle.", Price: "178.8"},
+            {ITEM: "Classic Belgian with Maple Drizzle(Belgian Waffles)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "The original favorite – golden Belgian waffle with a rich drizzle of maple syrup.", Price: "190.8"},
+            {ITEM: "lotus biscoff(Belgian Waffles)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "Loaded with Biscoff spread, crunchy cookie crumbs & chocolate drizzle – caramelized perfection.", Price: "226.8"},
+            {ITEM: "KitKat Crunch Waffle(Belgian)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "Crisp Belgian waffle topped with KitKat chunks & drizzled chocolate – crunchy meets gooey.", Price: "190.8"},
+            {ITEM: "Red Velvet(Belgian Waffles)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "Rich red velvet waffle topped with cream, chocolate & sweetness in every bite.", Price: "214.8"},
+            {ITEM: "Dark & White Chocolate(Belgian Waffles)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "A bold and creamy mix – drizzles of dark & white chocolate on a fluffy Belgian waffle.", Price: "154.8"},
+            {ITEM: "Milk & Dark Chocolate(Belgian Waffles)", TYPE: "Veg", Cetegory: "Belgian Waffles", Description: "Perfectly balanced – silky milk chocolate with deep dark chocolate on a warm Belgian waffle.", Price: "154.8"},
+            {ITEM: "Sweet Unicorn", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Waffle loaded with rainbow sprinkles, white chocolate shards, and a scoop of strawberry ice cream", Price: "238.8"},
+            {ITEM: "Choco Madness", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Milk & dark chocolate, choco chips, melted chocolate drizzle, and chocolate ice cream", Price: "250.8"},
+            {ITEM: "Kit Kat Ka-Boom", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Chopped Kit Kat bars, chocolate sauce, and a scoop of vanilla ice cream, finished with choco chips", Price: "238.8"},
+            {ITEM: "Oreo Overload", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Crushed Oreo, a layer of Nutella, chocolate chips, and a scoop of butterscotch ice cream", Price: "250.8"},
+            {ITEM: "Biscoff Bomb", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Biscoff pieces and a thick swirl of Biscoff spread with Nutella drizzle and a scoop of vanilla ice cream", Price: "262.8"},
+            {ITEM: "Sprinkle Explosion", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Rainbow sprinkles, choco chips, milk chocolate, and a scoop of vanilla ice cream", Price: "238.8"},
+            {ITEM: "Nutella Fantasy", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Nutella, choco chips, and chocolate ice cream", Price: "250.8"},
+            {ITEM: "Choco-Berry Crush", TYPE: "Veg", Cetegory: "Waffles with Ice Cream", Description: "Strawberry ice cream, choco chips, white chocolate, rainbow sprinkles, and Nutella", Price: "238.8"},
+            {ITEM: "Choco Cheese Bomb", TYPE: "Other", Cetegory: "Tanzo Bbangs(sweet)", Description: "Melted chocolate and gooey mozzarella stuffed inside a crispy waffle shell. Sweet and savory collide perfectly!", Price: "209"},
+            {ITEM: "Nutella Cream", TYPE: "Other", Cetegory: "Tanzo Bbangs(sweet)", Description: "Warm coin waffle filled with Nutella and soft whipped cream — smooth, rich, and indulgent.", Price: "215"},
+            {ITEM: "Oreo Choco Chip", TYPE: "Other", Cetegory: "Tanzo Bbangs(sweet)", Description: "Crushed Oreo and choco chips layered inside a waffle. A must for cookie lovers!", Price: "203"},
+            {ITEM: "Cheese & Egg Delight", TYPE: "Non-Veg", Cetegory: "Tanzo Bbangs(Savory)", Description: "A breakfast-style waffle with gooey cheese and sunny egg — perfect for savory snack lovers.", Price: "215"},
+            {ITEM: "Pizza Bbang", TYPE: "Other", Cetegory: "Tanzo Bbangs(Savory)", Description: "A mini pizza in waffle form! Zesty sauce, mozzarella, sweet corn, and herbs.", Price: "227"},
+            {ITEM: "Korean Bulgogi Waffle", TYPE: "Non-Veg", Cetegory: "Tanzo Bbangs(Savory)", Description: "Inspired by Korean BBQ — juicy chicken bulgogi and cheese wrapped in a waffle.", Price: "263"},
+            {ITEM: "Spicy Chicken Melt", TYPE: "Non-Veg", Cetegory: "Tanzo Bbangs(Savory)", Description: "Grilled spicy chicken with jalapeños and melted cheese. A kick in every bite.", Price: "251"},
+            {ITEM: "Loaded Veg Waffle", TYPE: "Other", Cetegory: "Tanzo Bbangs(Savory)", Description: "A vegetarian favorite with onion, capsicum, tomato, cheese, and mayo.", Price: "239"},
+            {ITEM: "Classic Crunch", TYPE: "Veg", Cetegory: "Tanzo Banana Dipz", Description: "", Price: "179"},
+            {ITEM: "Dino Delight", TYPE: "Veg", Cetegory: "Tanzo Banana Dipz", Description: "", Price: "199"},
+            {ITEM: "Nutty Dipstick", TYPE: "Veg", Cetegory: "Tanzo Banana Dipz", Description: "", Price: "199"},
+            {ITEM: "Sprinkles Bomb", TYPE: "Veg", Cetegory: "Tanzo Banana Dipz", Description: "", Price: "179"},
+            {ITEM: "Tropical Bliss", TYPE: "Veg", Cetegory: "Tanzo Banana Dipz", Description: "", Price: "199"},
+            {ITEM: "Sundae Supreme", TYPE: "Veg", Cetegory: "Tanzo Banana Dipz", Description: "", Price: "199"},
+            {ITEM: "Venilla(Milk Shakes)", TYPE: "Veg", Cetegory: "Milk Shakes", Description: "Smooth, creamy, and classic – the timeless vanilla indulgence.", Price: "154.8"},
+            {ITEM: "Butterscotch(Milk Shakes)", TYPE: "Veg", Cetegory: "Milk Shakes", Description: "Rich butterscotch blended into a velvety shake – sweet, nutty, and irresistible.", Price: "178.8"},
+            {ITEM: "Strawberry (Milk Shakes)", TYPE: "Veg", Cetegory: "Milk Shakes", Description: "Refreshing strawberry goodness blended into a creamy, fruity shake.", Price: "166.8"},
+            {ITEM: "Chocolate(Milk Shakes)", TYPE: "Veg", Cetegory: "Milk Shakes", Description: "Thick, rich, and chocolatey – a true treat for every chocoholic.", Price: "190.8"},
+            {ITEM: "Oreo(Milk Shakes)", TYPE: "Veg", Cetegory: "Milk Shakes", Description: "Crunchy Oreo cookies blended into a creamy shake – cookies & cream bliss.", Price: "190.8"},
+            {ITEM: "Five Star(Milk Shakes)", TYPE: "Veg", Cetegory: "Milk Shakes", Description: "Caramel-filled Five Star chocolate blended into a creamy, gooey delight.", Price: "178.8"},
+            {ITEM: "Kit-Kat(Milk Shakes)", TYPE: "Veg", Cetegory: "Milk Shakes", Description: "Crunchy KitKat bars crushed into a velvety chocolate shake – break and sip the fun.", Price: "178.8"},
+            {ITEM: "Venilla(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "Classic vanilla blended into a thick, creamy shake – smooth and timeless.", Price: "178.8"},
+            {ITEM: "Butterscotch(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "Crunchy butterscotch bits swirled into a velvety thick shake – sweet, nutty, and satisfying.", Price: "202.8"},
+            {ITEM: "Strawberry (Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "Lush strawberry flavor blended into a rich, thick shake – fruity, fresh, and indulgent.", Price: "190.8"},
+            {ITEM: "Chocolate(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "Decadent chocolate blended to perfection – thick, creamy, and oh-so-chocolatey.", Price: "214.8"},
+            {ITEM: "Oreo(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "Crunchy Oreos crushed into a creamy thick shake – cookies & cream indulgence.", Price: "202.8"},
+            {ITEM: "Dairy milk(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "", Price: "206.7"},
+            {ITEM: "Five Star(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "Caramel-filled Five Star blended thick & creamy – gooey chocolate bliss in every sip.", Price: "214.8"},
+            {ITEM: "Kit-Kat(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "Crunchy KitKat blended into a smooth, chocolatey thick shake – break and sip happiness.", Price: "214.8"},
+            {ITEM: "Mango(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "", Price: "141.7"},
+            {ITEM: "dry fruits(Thick Shakes)", TYPE: "Veg", Cetegory: "Thick Shakes", Description: "", Price: "167.7"},
+            {ITEM: "Fresh Lime Soda", TYPE: "Veg", Cetegory: "Mojito's", Description: "Classic and zesty – a sparkling blend of lime, soda, and minty freshness.", Price: "82.8"},
+            {ITEM: "Blue lagoon", TYPE: "Veg", Cetegory: "Mojito's", Description: "Cool blue twist with citrusy zing – a tropical refresher in every sip.", Price: "142.8"},
+            {ITEM: "Kiwi Ka Boom", TYPE: "Veg", Cetegory: "Mojito's", Description: "Burst of tangy kiwi with mint and fizz – a blast of fruity freshness.", Price: "142.8"},
+            {ITEM: "Mint", TYPE: "Veg", Cetegory: "Mojito's", Description: "Refreshing mint leaves muddled with lime & soda – the ultimate thirst quencher.", Price: "130.8"},
+            {ITEM: "Pina Colada", TYPE: "Veg", Cetegory: "Mojito's", Description: "Creamy coconut and pineapple fusion with a fizzy mojito twist – tropical paradise in a glass.", Price: "142.8"},
+            {ITEM: "green apple", TYPE: "Veg", Cetegory: "Mojito's", Description: "Crisp green apple flavor mixed with mint and soda – tangy, sweet, and refreshing.", Price: "130.8"},
+            {ITEM: "Blueberry Blaze", TYPE: "Veg", Cetegory: "Mojito's", Description: "Juicy blueberries with mint and lime – a cool, fruity explosion.", Price: "130.8"},
+            {ITEM: "Black current", TYPE: "Veg", Cetegory: "Mojito's", Description: "Sweet & tangy black currant blended with fizz and mint – bold and refreshing.", Price: "130.8"},
+            {ITEM: "Raspberry Rage", TYPE: "Veg", Cetegory: "Mojito's", Description: "Punch of raspberries with a minty twist – sweet, tangy, and irresistibly cool.", Price: "130.8"},
+            {ITEM: "veg loaded Wrap", TYPE: "Veg", Cetegory: "Wraps", Description: "Stuffed with crunchy veggies, sauces and mayonnaise – a wholesome, flavorful wrap for veggie lovers.", Price: "154.8"},
+            {ITEM: "Panner tikka wrap", TYPE: "Veg", Cetegory: "Wraps", Description: "Paneer tikka, fresh veggies, and zesty sauces rolled into a soft wrap – desi flavors on the go.", Price: "166.8"},
+            {ITEM: "Egg wrap", TYPE: "Other", Cetegory: "Wraps", Description: "Soft wrap filled with a fluffy egg omelette, veggies, and sauces – simple, tasty, and filling.", Price: "142.8"},
+            {ITEM: "Double egg wrap", TYPE: "Other", Cetegory: "Wraps", Description: "Double the eggs, double the flavor – a protein-packed wrap with sauces and fresh veggies.", Price: "154.8"},
+            {ITEM: "chicken Wrap", TYPE: "Non-Veg", Cetegory: "Wraps", Description: "Juicy chicken, crisp veggies, and tangy sauces wrapped in a soft roll – a classic anytime snack.", Price: "166.8"},
+            {ITEM: "chicken tikka wrap", TYPE: "Non-Veg", Cetegory: "Wraps", Description: "Chicken tikka, minty sauces, and crunchy veggies – a bold and spicy wrap with a desi twist.", Price: "178.8"},
+            {ITEM: "Paneer Maggi", TYPE: "Veg", Cetegory: "Maggi", Description: "Classic Maggi tossed with soft paneer cubes, spices, and a cheesy desi twist.", Price: "130.8"},
+            {ITEM: "Veggie Burst Maggi", TYPE: "Veg", Cetegory: "Maggi", Description: "Loaded with fresh crunchy veggies and seasoning – a colorful, wholesome Maggi delight.", Price: "118.8"},
+            {ITEM: "Chicken Maggi", TYPE: "Non-Veg", Cetegory: "Maggi", Description: "Juicy chicken chunks tossed into hot & spicy Maggi – comfort food with a protein punch.", Price: "154.8"},
+            {ITEM: "Egg Maggi", TYPE: "Other", Cetegory: "Maggi", Description: "Fluffy scrambled eggs mixed with masala Maggi – simple, hearty, and delicious.", Price: "142.8"},
+            {ITEM: "Tanzo Spl Maggi", TYPE: "Non-Veg", Cetegory: "Maggi", Description: "Our signature Maggi loaded with veggies, egg, chicken spices, and a secret twist – a must-try house special!", Price: "178.8"},
+            {ITEM: "Creamy Alfredo Veg Pasta", TYPE: "Veg", Cetegory: "Pasta", Description: "", Price: "190.8"},
+            {ITEM: "Peri Peri Chicken Pasta", TYPE: "Veg", Cetegory: "Pasta", Description: "", Price: "214.8"},
+            {ITEM: "Pink Sauce Pasta (Mix of red & white)", TYPE: "Veg", Cetegory: "Pasta", Description: "", Price: "202.8"},
+            {ITEM: "Cheesy Jalapeno Mac & Cheese", TYPE: "Veg", Cetegory: "Pasta", Description: "", Price: "238.8"},
+            {ITEM: "Arrabiata Pasta (Spicy Red Sauce)", TYPE: "Veg", Cetegory: "Pasta", Description: "", Price: "214.8"},
+            {ITEM: "The Chill & Kill Tower", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: "Blue Lagoon Mojito + Peri Peri Chicken Wings (2pcs) + Peri Peri Fries", Price: "274.8"},
+            {ITEM: "The French Tower", TYPE: "Veg", Cetegory: "Tanzo Tower's", Description: "Green Apple Mojito + French Fries", Price: "238.8"},
+            {ITEM: "The Maggi Madness Tower", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: "Tanzo spl Maggi + Green Apple Mojito", Price: "214.8"},
+            {ITEM: "Crunch & Chill Tower", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: "Crunchy Chicken Strips (2pcs) + Choco Shake + Classic Salted Fries", Price: "274.8"},
+            {ITEM: "Berry Bomb Tower", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: "Raspberry Mojito + Chicken Popcorn +  Classic Salted Fries", Price: "274.8"},
+            {ITEM: "Tanzo Couple Tower(2 towers)", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: "2 chicken burger + 2 Mojitos  + French Fries", Price: "514.8"},
+            {ITEM: "Tanzo Triple Treat", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: "  Kiwi Mojito + Crab Lollipop + Creamy cheese sticks", Price: "286.8"},
+            {ITEM: "The Cheeky Chotu Tower", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: " Oreo Shake + Aloo Tikki Burger + Peri Peri Fries", Price: "274.8"},
+            {ITEM: "Mini Beast Tower", TYPE: "Non-Veg", Cetegory: "Tanzo Tower's", Description: "Blueberry Blaze Mojito + Chicken Burger + Fried Chicken Strips(2pcs)", Price: "274.8"},
+            {ITEM: "The Burger Pasta Bash", TYPE: "Veg", Cetegory: "Tanzo Tower's", Description: "", Price: "284.7"},
+            {ITEM: "Baby Burger Blast", TYPE: "Veg", Cetegory: "Tanzo Tower's", Description: "", Price: "284.7"},
+            {ITEM: "Chicken Sausage Pizza", TYPE: "Non-Veg", Cetegory: "Pocket Pizza's", Description: "Juicy chicken sausage chunks with melty cheese and tangy sauce – hearty, flavorful, and satisfying.", Price: "250.8"},
+            {ITEM: "Paneer Makhani pocket pizza", TYPE: "Veg", Cetegory: "Pocket Pizza's", Description: "Soft paneer cubes simmered in rich, buttery makhani sauce with a cheesy twist – all stuffed on a golden pizza pocket for a perfect Indo-Italian treat!", Price: "262.8"},
+            {ITEM: "Chicken tikka pocket pizza", TYPE: "Non-Veg", Cetegory: "Pocket Pizza's", Description: "A cheesy delight stuffed with tender chicken tikka chunks, flavorful spices, and creamy sauce baked on  a soft pocket crust – desi flavors with an Italian twist!", Price: "238.8"},
+            {ITEM: "Chicken keema Pocket pizza", TYPE: "Non-Veg", Cetegory: "Pocket Pizza's", Description: "Juicy, spiced chicken keema loaded with cheese and herbs, on a golden baked pizza pocket – every bite bursts with flavor.", Price: "250.8"},
+            {ITEM: "chicken feast pocket pizza", TYPE: "Non-Veg", Cetegory: "Pocket Pizza's", Description: "A feast in every slice! Packed with succulent chicken, veggies, and extra cheese for the ultimate indulgence.", Price: "298.8"},
+            {ITEM: "veggie paradise pocket pizza", TYPE: "Veg", Cetegory: "Pocket Pizza's", Description: "A vegetarian's dream – a cheese filled with a medley of fresh veggies, tangy sauce, and Italian herbs.", Price: "238.8"},
+            {ITEM: "mexican veg pocket pizza", TYPE: "Veg", Cetegory: "Pocket Pizza's", Description: "Zesty Mexican flavors come alive with crunchy veggies, jalapeños, and cheese in a delicious pizza pocket", Price: "262.8"},
+            {ITEM: "Chicken Zinger burger", TYPE: "Non-Veg", Cetegory: "Smash Burger's", Description: "Crispy, golden-fried chicken fillet layered with fresh lettuce, creamy mayo, and cheese, tucked inside a soft toasted bun – crunchy outside, juicy inside, and loaded with flavor!", Price: "262.8"},
+            {ITEM: "Hot & Crispy Chicken Lollypops (5 pcs)", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Juicy chicken lollypops marinated in spices, coated in a crunchy batter, and fried till golden – crispy outside, tender inside, and bursting with flavor.", Price: "286.8"},
+            {ITEM: "Crab Lollipop 4pcs", TYPE: "Non-Veg", Cetegory: "Fried Chicken", Description: "Juicy crab meat shaped into lollipops, seasoned with spices, and fried to perfection – crunchy, flavorful, and a true seafood treat.", Price: "262.8"}
+        ];
+
+        // Group by category
+        const categories = {};
+        menuData.forEach(item => {
+            if (!categories[item.Cetegory]) {
+                categories[item.Cetegory] = [];
+            }
+            categories[item.Cetegory].push(item);
+        });
+
+        // Create category navigation
+        const categoryNav = document.getElementById('categoryNav');
+        Object.keys(categories).forEach(category => {
+            const button = document.createElement('button');
+            button.className = 'category-btn';
+            button.textContent = category;
+            button.onclick = () => scrollToCategory(category);
+            categoryNav.appendChild(button);
+        });
+
+        // Create menu sections
+        const menuContainer = document.getElementById('menuContainer');
+        Object.keys(categories).forEach(category => {
+            const section = document.createElement('div');
+            section.className = 'category-section';
+            section.id = `category-${category.replace(/\s+/g, '-')}`;
+            
+            const title = document.createElement('h2');
+            title.className = 'category-title';
+            title.textContent = category;
+            
+            const grid = document.createElement('div');
+            grid.className = 'menu-grid';
+            
+            categories[category].forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                
+                const typeClass = item.TYPE.toLowerCase().replace('-', '');
+                
+                menuItem.innerHTML = `
+                    <div class="item-header">
+                        <div class="item-name">${item.ITEM}</div>
+                        <div class="item-type ${typeClass}">${item.TYPE}</div>
+                    </div>
+                    <div class="item-price">₹${item.Price}</div>
+                    <div class="item-description">${item.Description || 'Delicious and flavorful!'}</div>
+                    <button class="order-btn" onclick="orderItem('${item.ITEM.replace(/'/g, "\\'")}')">
+                        Order via WhatsApp
+                    </button>
+                `;
+                
+                grid.appendChild(menuItem);
+            });
+            
+            section.appendChild(title);
+            section.appendChild(grid);
+            menuContainer.appendChild(section);
+        });
+
+        function scrollToCategory(category) {
+            const element = document.getElementById(`category-${category.replace(/\s+/g, '-')}`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function orderItem(itemName) {
+            // Replace with your actual WhatsApp number (include country code, no spaces)
+            const phoneNumber = "YOUR_WHATSAPP_NUMBER"; // Example: "919876543210"
+            const message = `Hi! I'd like to order: ${itemName}`;
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Make first category button active
+        if (categoryNav.firstChild) {
+            categoryNav.firstChild.classList.add('active');
+        }
+    </script>
+</body>
+</html>
