@@ -5,117 +5,379 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tanzo - Restaurant & Cafe</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            background: #764ba2;
-            color: white;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
             color: #333;
+            line-height: 1.6;
         }
-        .header {
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
             text-align: center;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             margin-bottom: 30px;
         }
+
         .logo {
-            font-size: 3em;
+            font-size: 4em;
             font-weight: bold;
-            color: #764ba2;
+            color: #ff6b00;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
-        .menu-item {
-            background: #f5f5f5;
+
+        .tagline {
+            font-size: 1.4em;
+            color: #ff6b00;
+            font-weight: bold;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .contact-bar {
+            background: #ff6b00;
+            color: white;
             padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border-left: 4px solid #764ba2;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-weight: bold;
         }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .category-title {
+            color: #ff6b00;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff8c00;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: #fffaf0;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 5px solid #ff6b00;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255, 107, 0, 0.1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.2);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
         .item-name {
+            font-size: 1.3em;
             font-weight: bold;
-            font-size: 1.2em;
+            color: #333;
+            flex: 1;
         }
+
+        .item-type {
+            background: #ff6b00;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .veg { background: #28a745; }
+        .nonveg { background: #dc3545; }
+        .other { background: #ffc107; color: #000; }
+
         .item-price {
-            color: #764ba2;
+            font-size: 1.4em;
             font-weight: bold;
-            font-size: 1.1em;
-            margin: 5px 0;
+            color: #ff6b00;
+            margin: 10px 0;
         }
+
+        .item-description {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
         .order-btn {
-            background: #28a745;
+            background: linear-gradient(135deg, #ff8c00, #ff6b00);
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 5px;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 3px 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
+            background: linear-gradient(135deg, #ff6b00, #e55a00);
+        }
+
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #ff6b00;
+            color: #ff6b00;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #ff6b00;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .menu-notice {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 3em;
+            }
+            
+            .category-nav {
+                justify-content: center;
+            }
+            
+            .category-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header>
             <div class="logo">TANZO</div>
-            <div>Restaurant • Cafe • Sweet Waffles</div>
+            <div class="tagline">IGNITE YOUR SENSES</div>
+            <div class="contact-bar">
+                <div class="contact-item">📞 +91 YOUR_PHONE_HERE</div>
+                <div class="contact-item">📍 Your Restaurant Address</div>
+                <div class="contact-item">🕒 Open: 11AM-11PM Daily</div>
+            </div>
+        </header>
+
+        <div class="menu-notice">
+            🍕 Browse our menu and order directly via WhatsApp! 🍔
         </div>
 
-        <h2>Popular Items</h2>
-        
-        <div class="menu-item">
-            <div class="item-name">Paneer Tikka Pocket Pizza</div>
-            <div class="item-price">₹238.8</div>
-            <div>Fiery peri peri paneer tikka with cheese and fresh veggies</div>
-            <button class="order-btn" onclick="orderWhatsApp('Paneer Tikka Pocket Pizza')">Order via WhatsApp</button>
+        <div class="category-nav" id="categoryNav">
+            <!-- Categories will be inserted here -->
         </div>
 
-        <div class="menu-item">
-            <div class="item-name">BBQ Chicken Pocket Pizza</div>
-            <div class="item-price">₹298.8</div>
-            <div>BBQ chicken with gooey melted cheese on golden crust</div>
-            <button class="order-btn" onclick="orderWhatsApp('BBQ Chicken Pocket Pizza')">Order via WhatsApp</button>
-        </div>
-
-        <div class="menu-item">
-            <div class="item-name">Smash Chicken Burger</div>
-            <div class="item-price">₹286.8</div>
-            <div>Double chicken patties with cheese and signature sauces</div>
-            <button class="order-btn" onclick="orderWhatsApp('Smash Chicken Burger')">Order via WhatsApp</button>
-        </div>
-
-        <div class="menu-item">
-            <div class="item-name">Nutella Oreo Waffle</div>
-            <div class="item-price">₹202.8</div>
-            <div>Belgian waffle with Nutella and crushed Oreos</div>
-            <button class="order-btn" onclick="orderWhatsApp('Nutella Oreo Waffle')">Order via WhatsApp</button>
-        </div>
-
-        <div class="menu-item">
-            <div class="item-name">Oreo Milk Shake</div>
-            <div class="item-price">₹190.8</div>
-            <div>Creamy shake with crunchy Oreo cookies</div>
-            <button class="order-btn" onclick="orderWhatsApp('Oreo Milk Shake')">Order via WhatsApp</button>
-        </div>
-
-        <div style="margin-top: 30px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-            <h3>Contact Us</h3>
-            <p>📞 +91 YOUR_PHONE_HERE</p>
-            <p>📍 Your Restaurant Address</p>
-            <p>🕒 Open: 11AM-11PM Daily</p>
+        <div id="menuContainer">
+            <!-- Menu items will be inserted here -->
         </div>
     </div>
 
+    <footer>
+        <p>© 2024 Tanzo Restaurant & Cafe. All rights reserved.</p>
+        <p>IGNITE YOUR SENSES • Restaurant • Cafe • Sweet Waffles</p>
+    </footer>
+
     <script>
-        function orderWhatsApp(itemName) {
-            // REPLACE THIS WITH YOUR WHATSAPP NUMBER
-            const phone = "918179974273"; // Example: 91 + your 10-digit number
-            const message = `Hi Tanzo! I'd like to order: ${itemName}`;
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+        // Simple menu data that will definitely work
+        const menuData = [
+            // Pocket Pizza's
+            {name: "Paneer Tikka Pocket Pizza", type: "veg", category: "Pocket Pizza's", desc: "Fiery peri peri paneer tikka loaded with spicy seasonings, fresh veggies, and oozing cheese", price: "238.8"},
+            {name: "Golden Corn Pocket Pizza", type: "veg", category: "Pocket Pizza's", desc: "Sweet golden corn layered over cheesy goodness and a soft, fresh crust", price: "202.8"},
+            {name: "Margherita Pocket Pizza", type: "veg", category: "Pocket Pizza's", desc: "Authentic Italian favorite with rich tomato sauce and mozzarella cheese", price: "202.8"},
+            {name: "BBQ Chicken Pocket Pizza", type: "nonveg", category: "Pocket Pizza's", desc: "BBQ chicken with gooey melted cheese on golden pocket crust", price: "298.8"},
+            
+            // Smash Burger's
+            {name: "Smash Chicken Double Patty Burger", type: "nonveg", category: "Smash Burger's", desc: "Two juicy chicken patties smashed to perfection with melted cheese", price: "286.8"},
+            {name: "Cheesy Veg Supreme Burger", type: "veg", category: "Smash Burger's", desc: "Veggie-loaded patty with gooey cheese and fresh veggies", price: "214.8"},
+            {name: "Chicken Zinger Burger", type: "nonveg", category: "Smash Burger's", desc: "Crispy fried chicken fillet with lettuce and creamy mayo", price: "262.8"},
+            
+            // Fried Chicken
+            {name: "Hot & Crispy Chicken (4 pcs)", type: "nonveg", category: "Fried Chicken", desc: "Four pieces of crunchy, flavorful fried chicken", price: "274.8"},
+            {name: "Peri Peri Chicken Wings (4 pcs)", type: "nonveg", category: "Fried Chicken", desc: "Fiery peri peri marinated wings fried crisp", price: "238.8"},
+            
+            // Waffles
+            {name: "Nutella Oreo Blast Waffle", type: "veg", category: "Belgian Waffles", desc: "Crisp waffle with Nutella, crushed Oreos & chocolate drizzle", price: "202.8"},
+            {name: "Lotus Biscoff Waffle", type: "veg", category: "Belgian Waffles", desc: "Loaded with Biscoff spread and cookie crumbs", price: "226.8"},
+            
+            // Beverages
+            {name: "Oreo Milk Shake", type: "veg", category: "Milk Shakes", desc: "Creamy shake with crunchy Oreo cookies", price: "190.8"},
+            {name: "Butterscotch Milk Shake", type: "veg", category: "Milk Shakes", desc: "Rich butterscotch blended into velvety shake", price: "178.8"},
+            {name: "Fresh Lime Soda", type: "veg", category: "Mojito's", desc: "Zesty blend of lime, soda and minty freshness", price: "82.8"}
+        ];
+
+        // Initialize the menu when page loads
+        function initMenu() {
+            console.log("Initializing menu...");
+            
+            const categoryNav = document.getElementById('categoryNav');
+            const menuContainer = document.getElementById('menuContainer');
+            
+            // Clear existing content
+            categoryNav.innerHTML = '';
+            menuContainer.innerHTML = '';
+            
+            // Group by category
+            const categories = {};
+            menuData.forEach(item => {
+                if (!categories[item.category]) {
+                    categories[item.category] = [];
+                }
+                categories[item.category].push(item);
+            });
+            
+            // Create category buttons
+            Object.keys(categories).forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-btn';
+                button.textContent = category;
+                button.onclick = () => {
+                    document.getElementById(`category-${category.replace(/\s+/g, '-')}`).scrollIntoView({behavior: 'smooth'});
+                };
+                categoryNav.appendChild(button);
+            });
+            
+            // Create menu sections
+            Object.keys(categories).forEach(category => {
+                const section = document.createElement('div');
+                section.className = 'category-section';
+                section.id = `category-${category.replace(/\s+/g, '-')}`;
+                
+                const title = document.createElement('h2');
+                title.className = 'category-title';
+                title.textContent = category;
+                
+                const grid = document.createElement('div');
+                grid.className = 'menu-grid';
+                
+                categories[category].forEach(item => {
+                    const menuItem = document.createElement('div');
+                    menuItem.className = 'menu-item';
+                    
+                    menuItem.innerHTML = `
+                        <div class="item-header">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-type ${item.type}">${item.type.toUpperCase()}</div>
+                        </div>
+                        <div class="item-price">₹${item.price}</div>
+                        <div class="item-description">${item.desc}</div>
+                        <button class="order-btn" onclick="orderItem('${item.name.replace(/'/g, "\\'")}')">
+                            📱 Order via WhatsApp
+                        </button>
+                    `;
+                    
+                    grid.appendChild(menuItem);
+                });
+                
+                section.appendChild(title);
+                section.appendChild(grid);
+                menuContainer.appendChild(section);
+            });
+            
+            console.log("Menu initialized successfully!");
         }
+
+        // WhatsApp ordering function
+        function orderItem(itemName) {
+            // REPLACE WITH YOUR WHATSAPP NUMBER (country code + number, no spaces)
+            const phoneNumber = "918179974273";
+            const message = `Hi Tanzo! I'd like to order: ${itemName}`;
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initMenu);
+        
+        // Also try initializing after a short delay as backup
+        setTimeout(initMenu, 100);
     </script>
 </body>
 </html>
